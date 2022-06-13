@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.or">
+<head>
+    <meta charset="UTF-8">
+    <title>Nomina</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<nav th:replace="layout/layout::navbar"></nav>
+<div class="container my-4">
+    <table class="table">
+        <thead class="table-dark">
+            <th>Salario Base</th>
+            <th>Auxilio de transporte</th>
+            <th>Bono de cumpleaños</th>
+            <th>Descuento pensión</th>
+            <th>Descuento salud</th>
+            <th>Valor del plan</th>
+            <th>Total devegado</th>
+            <th>Fecha de liquidación</th>
+        </thead>
+        <tbody>
+            <tr th:each="nom : ${nominas}">
+                <td th:text="${nom.empleado.sueldo}"></td>
+                <td th:text="${nom.auxilio_transporte}"></td>
+                <td th:text="${nom.bono_cumpleanos}"></td>
+                <td th:text="${nom.descuento_pension}"></td>
+                <td th:text="${nom.descuento_salud}"></td>
+                <td th:text="${nom.val_plan_celular}"></td>
+                <td th:text="${nom.total_devegado}"></td>
+                <td th:text="${nom.fecha}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/empleados}" class="btn btn-light">Volver</a>
+</div>
+</body>
+</html>

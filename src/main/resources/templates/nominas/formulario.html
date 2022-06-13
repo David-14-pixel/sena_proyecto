@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.or">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <title>Nomina</title>
+</head>
+<body>
+<nav th:replace="layout/layout::navbar"></nav>
+<div class="container my-5">
+    <div class="card">
+        <div class="card-header">
+            Información del empleado
+        </div>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-6">
+                    <label>Nombre del empleado</label>
+                    <input type="text" th:value="${empleado.nombre}" disabled class="form-control">
+                </div>
+                <div class="col-6">
+                    <label>Fecha de nacimiento del empleado</label>
+                    <input type="text" th:value="${empleado.fecha_nacimiento}" class="form-control" disabled>
+                </div>
+                
+            </div>
+            <div class="row my-3">
+                <div class="col-6">
+                    <label>Edad del empleado</label>
+                    <input type="text" th:value="${empleado.edad}" class="form-control" disabled>
+                </div>
+                <div class="col-6">
+                <label>Celular del empleado</label>
+                <input type="text" th:value="${empleado.celular}" class="form-control" disabled>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-6">
+                    <label>Turno del empleado</label>
+                    <input type="text" th:value="${empleado.turno.turno}" class="form-control" disabled>
+                </div>
+                <div class="col-6">
+                    <label>Horarios del empleado</label>
+                    <input type="text" th:value="${empleado.turno.horarios}" class="form-control" disabled>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-6">
+                    <label>Operador del empleado</label>
+                    <input type="text" th:value="${empleado.operador.operador}" class="form-control" disabled>
+                </div>
+                <div class="col-6">
+                    <label>Salario del empleado</label>
+                    <input type="text" th:value="${empleado.sueldo}" class="form-control" disabled>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="card my-3">
+        <div class="card-header">
+            Información de nomina
+        </div>
+        <form th:action="@{/nominas}" th:object="${nomina}" method="post">
+            <div class="card-body">
+                <div class="row">
+                    <input type="hidden" th:value="${empleado.id}" name="empleado" id="empleado" class="form-control">
+                    <div class="col-6">
+                        <label>Auxilio de transporte</label>
+                        <input type="text" th:value="${auxilio_transporte}" name="auxilio_transporte" id="auxilio_transporte" readonly="true" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label>Bono de cumpleaños</label>
+                        <input type="text" th:value="${bono_cumpleanos}" name="bono_cumpleanos" id="bono_cumpleanos" readonly="true" class="form-control">
+                    </div>
+
+                </div>
+                <div class="row my-3">
+                    <div class="col-6">
+                        <label>Valor del plan de celular</label>
+                        <input type="text" th:value="${empleado.operador.valor_plan}" name="val_plan_celular" id="val_plan_celular" readonly class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <label>Descuento salud</label>
+                        <input type="text" th:value="${otros}" name="descuento_salud" id="descuento_salud" readonly class="form-control">
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col-6">
+                        <label>Descuento pensión</label>
+                        <input type="text" th:value="${otros}" name="descuento_pension" id="descuento_pension" class="form-control" readonly>
+                    </div>
+                    <div class="col-6">
+                        <label>Total devegado</label>
+                        <input type="text" th:value="${total}" name="total_devegado" id="total_devegado" readonly class="form-control">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Liquidar</button>
+                <a th:href="@{/empleados}" class="btn btn-light">Volver</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

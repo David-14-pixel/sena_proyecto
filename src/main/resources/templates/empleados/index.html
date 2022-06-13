@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <title>Empleados</title>
+</head>
+<body>
+<nav th:replace="layout/layout::navbar"></nav>
+<div class="container my-5 ">
+    <div class="card w-50 mx-auto">
+
+        <div class="card-header">
+            Buscar información del empleado
+        </div>
+        <div class="card-body">
+            <a th:href="@{/empleados/nuevo}" class="mx-auto w-25 btn btn-primary btn-sm">Agregar</a>
+            <div class="row my-4">
+                <div class="col-12">
+                    <select id="cedula_empleado" onchange="encontrarEmpleado(event)" class="form-control">
+                        <option value="">Seleccione una cedula</option>
+                        <option th:each="empleado : ${empleados}" th:value="${empleado.id}" th:text="${empleado.cedula}"></option>
+                    </select>
+                </div>
+                <div class="col-12 my-3" id="informacion_empleado" style="display: none;">
+                        <div class="card-body">
+                            <p class="card-text">Nombre del empleado : <span id="nombre_empleado"></span></p>
+                            <p class="card-text">Fecha de nacimiento : <span id="fecha_nacimiento_empleado"></span></p>
+                            <p class="card-text">Edad : <span id="edad_empleado"></span></p>
+                            <p class="card-text">Turno : <span id="turno_empleado"></span></p>
+
+                            <div id="botones">
+
+                            </div>
+                        </div>
+                </div>
+
+            </div>
+    </div>
+    </div>
+
+</div>
+<div th:replace="layout/layout::js"></div>
+<script th:fragment="alerta_info" th:if="${info != null}">
+    Swal.fire(
+      'Correcto!',
+      '[[${info}]]',
+      'success'
+    )
+</script>
+<script type="text/javascript" th:if="${error!=null}">
+Swal.fire({
+	  icon: 'error',
+	  title: 'Fallo',
+	  text: '[[${error}]]',
+
+	});
+</script>
+</body>
+</html>

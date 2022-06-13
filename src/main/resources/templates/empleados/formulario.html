@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Empleado</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+
+</head>
+<body>
+<nav th:replace="layout/layout::navbar"></nav>
+    <div class="container">
+        <div class="card my-3">
+            <div class="card-header">
+                Información de nomina
+            </div>
+            <form th:action="@{/empleados}" th:object="${empleado}" method="post" id="registro">
+                <div class="card-body">
+                    <div class="row">
+                        <input type="hidden" th:field="*{id}" >
+                        <div class="col-4">
+                            <label>Cedula</label>
+                            <input type="text" th:field="*{cedula}" maxlength="10" class="form-control">
+                            <small id="msg_cedula" style="color:red;"></small>
+                        </div>
+                        <div class="col-4">
+                            <label>Nombre</label>
+                            <input type="text" th:field="*{nombre}" class="form-control">
+                        </div>
+                        <div class="col-4">
+                            <label>Celular</label>
+                            <input type="text" th:field="*{celular}" maxlength="10"  class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="row my-3">
+
+                        <div class="col-4">
+                            <label>Correo</label>
+                            <input type="text" th:field="*{correo}" class="form-control">
+                            <small id="msgcorreo" style="color:red;"></small>
+                        </div>
+                        <div class="col-4">
+                            <label>Estrato</label>
+                            <select class="form-control" th:field="*{estrato}">
+                                <option value="">Seleccione un estrato</option>
+                                <option th:each="i: ${#numbers.sequence(1, 6)}" th:value="${i}" th:text="${i}"></option>
+
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label>Edad</label>
+                            <input type="number" th:field="*{edad}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col-4">
+                            <label>Fecha Nacimiento</label>
+                            <input type="date" th:field="*{fecha_nacimiento}" class="form-control">
+                        </div>
+                        <div class="col-4">
+                            <label>Turno</label>
+                            <select th:field="*{turno}" class="form-control">
+                                <option value="">Seleccione el turno</option>
+                                <option th:each="turno : ${turnos}" th:value="${turno.turno}" th:text="${turno.horarios}"></option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label>Sueldo</label>
+                            <input type="text" th:field="*{sueldo}" class="form-control">
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btnconfirmar">Guardar</button>
+                    <a th:href="@{/empleados}" class="btn btn-light">Volver</a>
+                </div>
+            </form>
+        </div>
+    </div>
+<div th:replace="layout/layout::js"></div>
+</body>
+</html>
